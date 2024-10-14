@@ -2,11 +2,11 @@
 // IDE used: Xcode
 #include <iostream>
 #include <string>
+#include <iomanip>
 #include <random>
 using namespace std;
 
-const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
-//const int SIZE = 15;
+const int WIDTH = 8;
 
 class Goat {
 
@@ -23,7 +23,7 @@ public:
         random_device randAge;
         uniform_int_distribution<int>age_Range(1, 20);    // Random number chosen for age
         random_device randName_Color;
-        uniform_int_distribution<int>nc_Range(0, 5);    // Random number chosen for color/name array
+        uniform_int_distribution<int>nc_Range(0, 4);    // Random number chosen for color/name array
         
         age = age_Range(randAge);
         name = names[nc_Range(randName_Color)];
@@ -141,7 +141,8 @@ public:
         Node* current = head;
         if (!current) return;
         while (current) {
-            cout << current->data.getName() << " (Color: " << current->data.getColor() << ", Age: " << current->data.getAge() << ")" << endl;
+            cout << current->data.getName() << setw(WIDTH) << " (Color: " << current->data.getColor();
+            cout << ", Age: " << current->data.getAge() << ")" << endl;
             current = current->next;
         }
         cout << endl;
@@ -151,7 +152,8 @@ public:
         Node* current = tail;
         if (!current) return;
         while (current) {
-            cout << current->data.getName() << " (Color: " << current->data.getColor() << ", Age: " << current->data.getAge() << ")" << endl;
+            cout << current->data.getName() << setw(WIDTH) << " (Color: " << current->data.getColor();
+            cout << ", Age: " << current->data.getAge() << ")" << endl;
             current = current->prev;
         }
         cout << endl;
@@ -175,14 +177,14 @@ int main() {
     int size = size_Range(randSize);    //Random size generated between 1 - 20
     
 
-    for (int i = 0; i < size; ++i) {
+    for (int i = 0; i < size; ++i) {    //Goat object pushed into linked list
         Goat goat;
         list.push_back(goat);
     }
-    cout << "List forward: " << endl;
+    cout << "List forward: " << endl;    // List outputted forward
     list.print();
 
-    cout << "List backward: " << endl;
+    cout << "List backward: " << endl;    // List outputted backward
     list.print_reverse();
 
     cout << "Deleting list, then trying to print.\n";
