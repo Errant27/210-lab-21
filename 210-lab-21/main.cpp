@@ -14,16 +14,16 @@ private:
     int age;
     string name;
     string color;
-    string names[4] = {"Tim", "Tom", "Jason", "Alex"};
-    string colors[4] = {"Green", "Blue", "Yellow", "Red"};
+    string names[5] = {"Teen", "Mature", "Senior", "Godlike", "Ascended"};
+    string colors[5] = {"Yellow", "Red", "Mauve", "Gold", "White"};
     
     
 public:
     Goat() { // Default constructor
         random_device randAge;
-        uniform_int_distribution<int>age_Range(1, 20);
+        uniform_int_distribution<int>age_Range(1, 20);    // Random number chosen for age
         random_device randName_Color;
-        uniform_int_distribution<int>nc_Range(0, 3);
+        uniform_int_distribution<int>nc_Range(0, 5);    // Random number chosen for color/name array
         
         age = age_Range(randAge);
         name = names[nc_Range(randName_Color)];
@@ -141,7 +141,7 @@ public:
         Node* current = head;
         if (!current) return;
         while (current) {
-            cout << current->data.getName() << " (" << current->data.getColor() << ", " << current->data.getAge() << ")" << endl;
+            cout << current->data.getName() << " (Color: " << current->data.getColor() << ", Age: " << current->data.getAge() << ")" << endl;
             current = current->next;
         }
         cout << endl;
@@ -151,7 +151,7 @@ public:
         Node* current = tail;
         if (!current) return;
         while (current) {
-            cout << current->data.getName() << " (" << current->data.getColor() << ", " << current->data.getAge() << ")" << endl;
+            cout << current->data.getName() << " (Color: " << current->data.getColor() << ", Age: " << current->data.getAge() << ")" << endl;
             current = current->prev;
         }
         cout << endl;
@@ -169,7 +169,11 @@ public:
 // Driver program
 int main() {
     DoublyLinkedList list;
-    int size = rand() % (MAX_LS-MIN_LS+1) + MIN_LS;
+    random_device randSize;
+    uniform_int_distribution<int>size_Range(5, 20);
+    
+    int size = size_Range(randSize);    //Random size generated between 1 - 20
+    
 
     for (int i = 0; i < size; ++i) {
         Goat goat;
